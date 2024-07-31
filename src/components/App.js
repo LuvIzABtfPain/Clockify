@@ -3,7 +3,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import WorkspaceList from './WorkspaceList';
-import WorkspaceDetails from './WorkspaceDetails';
+import ProjectList from './ProjectList';
+import TaskList from './TaskList';
 
 const App = () => {
     return (
@@ -12,7 +13,8 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/workspaces" element={<WorkspaceList />} />
-                    <Route path="/workspacedetails/:workspaceId" element={<WorkspaceDetails />} />
+                    <Route path="/projectList/:workspaceId" element={<ProjectList />} />
+                    <Route path="/projectdetails/:projectId/tasks" element={<TaskList />} />
                 </Routes>
             </div>
         </Router>

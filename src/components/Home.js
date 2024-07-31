@@ -7,8 +7,12 @@ const Home = () => {
         <div className="Home">
             <header className="App-header">
                 <h1>Workspace Manager</h1>
-                <Link to="/workspaces">View Workspaces</Link>
             </header>
+            <div className="workspace-buttons">
+                <Link to="/workspaces">
+                    <button className="workspace-button">View Workspaces</button>
+                </Link>
+            </div>
         </div>
     );
 };

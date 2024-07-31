@@ -1,17 +1,18 @@
-// src/components/WorkspaceList.js
+// src/components/ProjectList.js
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWorkspacesSuccess, fetchWorkspacesFailure } from '../redux/actions';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const WorkspaceList = () => {
+const ProjectList = () => {
+    const { workspaceId } = useParams();
     const dispatch = useDispatch();
-    const workspaces = useSelector(state => state.workspaces.workspaces);
+    const projects = useSelector(state => state.workspaces.projects);
     const error = useSelector(state => state.workspaces.error);
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('https://api.clockify.me/api/v1/workspaces', {
+        fetch(`https://api.clockify.me/api/v1/workspaces/${workspaceId}/projects`, {
             method: 'GET',
             headers: {
                 'x-api-key': 'YWQ2YmY3NjUtYTM0OC00ZmQ1LWE5NTMtMmM2MTYyNDQxMDNh',
@@ -23,26 +24,26 @@ const WorkspaceList = () => {
                 dispatch(fetchWorkspacesSuccess(data));
             })
             .catch(error => {
-                dispatch(fetchWorkspacesFailure('Failed to fetch workspaces: ' + error.message));
+                dispatch(fetchWorkspacesFailure('Failed to fetch projects: ' + error.message));
             });
-    }, [dispatch]);
+    }, [workspaceId, dispatch]);
 
     return (
         <div>
             <div className="List">
                 <header className="App-header">
-                    <h1>Workspace List</h1>
+                    <h1>Project List</h1>
                 </header>
             </div>
-            <div className="workspace-buttons">
+            <div className="project-buttons">
                 {error && <div className="error">{error}</div>}
-                {workspaces.map(workspace => (
+                {projects.map(project => (
                     <button
-                        className="workspace-button"
-                        key={workspace.id}
-                        onClick={() => navigate(`/projectList/${workspace.id}`)}
+                        className="project-button"
+                        key={project.id}
+                        onClick={() => navigate(`/projectdetails/${project.id}/tasks`)}
                     >
-                        {workspace.name}
+                        {project.name} - {project.clientName || 'No Client'}
                     </button>
                 ))}
             </div>
@@ -50,4 +51,4 @@ const WorkspaceList = () => {
     );
 };
 
-export default WorkspaceList;
+export default ProjectList;
