@@ -3,12 +3,15 @@ import {
     FETCH_WORKSPACES_SUCCESS,
     FETCH_WORKSPACES_FAILURE,
     FETCH_WORKSPACE_INFO_SUCCESS,
-    FETCH_WORKSPACE_INFO_FAILURE
+    FETCH_WORKSPACE_INFO_FAILURE,
+    FETCH_PROJECTS_SUCCESS,
+    FETCH_PROJECTS_FAILURE
 } from './actions';
 
 const initialState = {
     workspaces: [],
     workspaceInfo: null,
+    projects: {},
     error: null
 };
 
@@ -32,6 +35,20 @@ const workspaceReducer = (state = initialState, action) => {
                 error: null
             };
         case FETCH_WORKSPACE_INFO_FAILURE:
+            return {
+                ...state,
+                error: action.payload
+            };
+        case FETCH_PROJECTS_SUCCESS:
+            return {
+                ...state,
+                projects: {
+                    ...state.projects,
+                    [action.payload.workspaceId]: action.payload.projects
+                },
+                error: null
+            };
+        case FETCH_PROJECTS_FAILURE:
             return {
                 ...state,
                 error: action.payload

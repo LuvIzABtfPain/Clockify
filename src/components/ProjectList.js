@@ -1,13 +1,13 @@
 // src/components/ProjectList.js
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchWorkspacesSuccess, fetchWorkspacesFailure } from '../redux/actions';
+import { fetchProjectsSuccess, fetchProjectsFailure } from '../redux/actions';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const ProjectList = () => {
     const { workspaceId } = useParams();
     const dispatch = useDispatch();
-    const projects = useSelector(state => state.workspaces.projects);
+    const projects = useSelector(state => state.workspaces.projects[workspaceId] || []);
     const error = useSelector(state => state.workspaces.error);
     const navigate = useNavigate();
 
@@ -21,10 +21,10 @@ const ProjectList = () => {
         })
             .then(response => response.json())
             .then(data => {
-                dispatch(fetchWorkspacesSuccess(data));
+                dispatch(fetchProjectsSuccess(workspaceId, data));
             })
             .catch(error => {
-                dispatch(fetchWorkspacesFailure('Failed to fetch projects: ' + error.message));
+                dispatch(fetchProjectsFailure('Failed to fetch projects: ' + error.message));
             });
     }, [workspaceId, dispatch]);
 
@@ -35,16 +35,21 @@ const ProjectList = () => {
                     <h1>Project List</h1>
                 </header>
             </div>
-            <div className="project-buttons">
+            <div className="workspace-buttons">
+                <div className="project-head">
+                    <span className="project-name">PROJECT NAME</span>
+                    <span className="project-client">CLIENT NAME</span>
+                </div>
                 {error && <div className="error">{error}</div>}
                 {projects.map(project => (
-                    <button
-                        className="project-button"
+                    <div
+                        className="project-row"
                         key={project.id}
                         onClick={() => navigate(`/projectdetails/${project.id}/tasks`)}
                     >
-                        {project.name} - {project.clientName || 'No Client'}
-                    </button>
+                        <span className="project-name">{project.name}</span>
+                        <span className="project-client">{project.clientName || 'No Client'}</span>
+                    </div>
                 ))}
             </div>
         </div>
