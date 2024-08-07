@@ -5,14 +5,16 @@ import {
     FETCH_WORKSPACE_INFO_SUCCESS,
     FETCH_WORKSPACE_INFO_FAILURE,
     FETCH_PROJECTS_SUCCESS,
-    FETCH_PROJECTS_FAILURE
+    FETCH_PROJECTS_FAILURE,
+    SET_API_KEY
 } from './actions';
 
 const initialState = {
     workspaces: [],
     workspaceInfo: null,
     projects: {},
-    error: null
+    error: null,
+    apikey: null
 };
 
 const workspaceReducer = (state = initialState, action) => {
@@ -52,6 +54,11 @@ const workspaceReducer = (state = initialState, action) => {
             return {
                 ...state,
                 error: action.payload
+            };
+        case SET_API_KEY:
+            return {
+                ...state,
+                apiKey: action.payload
             };
         default:
             return state;

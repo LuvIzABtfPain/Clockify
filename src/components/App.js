@@ -12,6 +12,8 @@ const App = () => {
             <div className="App">
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/:userID" element={<Home />} />
+                    <Route path="/apikey/:apikey" element={<Home />} />
                     <Route path="/workspaces" element={<WorkspaceList />} />
                     <Route path="/projectList/:workspaceId" element={<ProjectList />} />
                     <Route path="/projectdetails/:projectId/tasks" element={<TaskList />} />
