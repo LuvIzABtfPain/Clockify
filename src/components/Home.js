@@ -18,7 +18,6 @@ const Home = () => {
                 .then(response => response.json())
                 .then(data => {
                     setHasApiKey(data.hasApiKey);
-                    console.log(data.apikey);
                     dispatch(setApiKey(data.apikey));
                 });
         }
@@ -33,9 +32,10 @@ const Home = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ userID, apiKey })
-        }).then(() => {
-            dispatch(setApiKey(apikey))
-            setHasApiKey(true);
+        }).then(response => response.json())
+            .then(data => {
+            dispatch(setApiKey(data.apikey))
+            setHasApiKey(data.hasApiKey);
         });
     };
     return (
