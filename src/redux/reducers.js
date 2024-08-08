@@ -56,6 +56,7 @@ const workspaceReducer = (state = initialState, action) => {
                 error: action.payload
             };
         case SET_API_KEY:
+            console.log(state)
             return {
                 ...state,
                 apikey: action.payload

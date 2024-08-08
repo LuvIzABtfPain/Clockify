@@ -9,7 +9,7 @@ const ProjectList = () => {
     const dispatch = useDispatch();
     const projects = useSelector(state => state.workspaces.projects[workspaceId] || []);
     const error = useSelector(state => state.workspaces.error);
-    const apikey = useSelector(state => state.apikey);
+    const apikey = useSelector(state => state.workspaces.apikey);
     const navigate = useNavigate();
 
     useEffect(() => {

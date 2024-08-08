@@ -9,7 +9,7 @@ const WorkspaceList = () => {
     const workspaces = useSelector(state => state.workspaces.workspaces);
     const error = useSelector(state => state.workspaces.error);
     const navigate = useNavigate();
-    const apiKey = useSelector(state => state.apikey);
+    const apiKey = useSelector(state => state.workspaces.apikey);
 
     useEffect(() => {
         fetch('https://api.clockify.me/api/v1/workspaces', {

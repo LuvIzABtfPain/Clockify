@@ -18,6 +18,7 @@ const Home = () => {
                 .then(response => response.json())
                 .then(data => {
                     setHasApiKey(data.hasApiKey);
+                    console.log(data.apikey);
                     dispatch(setApiKey(data.apikey));
                 });
         }
