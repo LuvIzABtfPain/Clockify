@@ -8,7 +8,6 @@ const Home = () => {
     const [hasApiKey, setHasApiKey] = useState(false);
     const { userID, apikey } = useParams();
     const dispatch = useDispatch();
-    const storedApiKey = useSelector(state => state.apiKey);
 
     useEffect(() => {
         if(apikey) {
@@ -19,6 +18,7 @@ const Home = () => {
                 .then(response => response.json())
                 .then(data => {
                     setHasApiKey(data.hasApiKey);
+                    dispatch(setApiKey(data.apikey));
                 });
         }
     }, [userID, apikey, dispatch])
@@ -33,6 +33,7 @@ const Home = () => {
             },
             body: JSON.stringify({ userID, apiKey })
         }).then(() => {
+            dispatch(setApiKey(apikey))
             setHasApiKey(true);
         });
     };
@@ -48,8 +49,8 @@ const Home = () => {
                     </Link>
                 ) : (
                     <form onSubmit={handleSubmit}>
-                        <input type="text" name="apiKey" placeholder="Enter API Key" required />
-                        <button type="submit">Submit</button>
+                        <input className="input-api-key" type="text" name="apiKey" placeholder="Enter API Key" required />
+                        <button className="workspace-button" type="submit">Submit</button>
                     </form>
                 )}
             </div>

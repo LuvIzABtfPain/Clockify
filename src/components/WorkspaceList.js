@@ -9,12 +9,13 @@ const WorkspaceList = () => {
     const workspaces = useSelector(state => state.workspaces.workspaces);
     const error = useSelector(state => state.workspaces.error);
     const navigate = useNavigate();
+    const apiKey = useSelector(state => state.apikey);
 
     useEffect(() => {
         fetch('https://api.clockify.me/api/v1/workspaces', {
             method: 'GET',
             headers: {
-                'x-api-key': 'YWQ2YmY3NjUtYTM0OC00ZmQ1LWE5NTMtMmM2MTYyNDQxMDNh',
+                'x-api-key': apiKey,
                 'Content-Type': 'application/json'
             }
         })
@@ -25,7 +26,7 @@ const WorkspaceList = () => {
             .catch(error => {
                 dispatch(fetchWorkspacesFailure('Failed to fetch workspaces: ' + error.message));
             });
-    }, [dispatch]);
+    }, [dispatch, apiKey]);
 
     return (
         <div>
