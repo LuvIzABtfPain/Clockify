@@ -38,13 +38,15 @@ const WorkspaceList = () => {
             <div className="workspace-buttons">
                 {error && <div className="error">{error}</div>}
                 {workspaces.map(workspace => (
-                    <button
-                        className="workspace-button"
-                        key={workspace.id}
-                        onClick={() => navigate(`/projectList/${workspace.id}`)}
-                    >
-                        {workspace.name}
-                    </button>
+                    <div className="workspace-item" >
+                        <button
+                            className="workspace-button"
+                            key={workspace.id}
+                            onClick={() => navigate(`/projectList/${workspace.id}`)}
+                        >
+                            {workspace.name}
+                        </button>
+                    </div>
                 ))}
             </div>
         </div>
