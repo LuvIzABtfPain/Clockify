@@ -70,6 +70,16 @@
   flex: 1;
   text-align: right;
 }
+.task-status {
+  flex: 1;
+  text-align: right;
+}
+.task-active {
+  color: green;
+}
+.task-inactive {
+  color: red;
+}
 .App-link {
   color: #61dafb;
 }

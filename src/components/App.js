@@ -16,7 +16,7 @@ const App = () => {
                     <Route path="/apikey/:apikey" element={<Home />} />
                     <Route path="/workspaces" element={<WorkspaceList />} />
                     <Route path="/projectList/:workspaceId" element={<ProjectList />} />
-                    <Route path="/projectdetails/:projectId/tasks" element={<TaskList />} />
+                    <Route path="/projectdetails/:workspaceId/:projectId/tasks" element={<TaskList />} />
                 </Routes>
             </div>
         </Router>

@@ -46,7 +46,7 @@ const ProjectList = () => {
                     <div
                         className="project-row"
                         key={project.id}
-                        onClick={() => navigate(`/projectdetails/${project.id}/tasks`)}
+                        onClick={() => navigate(`/projectdetails/${workspaceId}/${project.id}/tasks`)}
                     >
                         <span className="project-name">{project.name}</span>
                         <span className="project-client">{project.clientName || 'No Client'}</span>
