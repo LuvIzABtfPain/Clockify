@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import {useSelector, useDispatch} from "react-redux";
 import {fetchProjectsFailure} from "../redux/actions";
+import BackButton from "./BackButton";
 
 const TaskList = () => {
     const { projectId, workspaceId } = useParams();
@@ -33,14 +34,17 @@ const TaskList = () => {
                     <h1>Task List for Project {projectId}</h1>
                 </header>
             </div>
+            <BackButton/>
             <div className="task-list">
                 <div className="project-head">
                     <span className="project-name">TASK NAME</span>
+                    <span className="project-client">ASSIGNEE ID</span>
                     <span className="project-client">STATUS</span>
                 </div>
                 {tasks.map(task => (
                     <div key={task.id} className="task-item project-row">
                         <span className="task-name project-name">{task.name}</span>
+                        <span className="project-client">{ task.assigneeIds ? task.assigneeIds.join(', ') : task.assigneeId }</span>
                         <span className={`task-status ${task.status === 'ACTIVE' ? 'task-active' : 'task-inactive'}`}>{task.status}</span>
                     </div>
                 ))}

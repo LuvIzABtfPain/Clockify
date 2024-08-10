@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjectsSuccess, fetchProjectsFailure } from '../redux/actions';
 import { useNavigate, useParams } from 'react-router-dom';
+import BackButton from "./BackButton";
 
 const ProjectList = () => {
     const { workspaceId } = useParams();
@@ -36,6 +37,7 @@ const ProjectList = () => {
                     <h1>Project List</h1>
                 </header>
             </div>
+            <BackButton/>
             <div className="workspace-buttons">
                 <div className="project-head">
                     <span className="project-name">PROJECT NAME</span>
