@@ -105,7 +105,12 @@
   margin-bottom: 5px;
 }
 
+.time-entries {
+    margin-top: 50px;
+}
+
 .time-entries table {
+  border: 1px solid;
   width: 100%;
 }
 

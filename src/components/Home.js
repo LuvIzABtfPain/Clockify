@@ -1,7 +1,7 @@
 // src/components/Home.js
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setApiKey } from '../redux/actions';
 
 const Home = () => {

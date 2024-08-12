@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjectsSuccess, fetchProjectsFailure } from '../redux/actions';
 import { useNavigate, useParams } from 'react-router-dom';
 import BackButton from "./BackButton";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { formatDuration } from '../utils/formatDuration';
+import { formatTimeRange } from '../utils/formatTimeRange';
 
 const ProjectList = () => {
     const { workspaceId } = useParams();
@@ -81,8 +85,8 @@ const ProjectList = () => {
                     <th>User ID</th>
                     <th>Task ID</th>
                     <th>Project ID</th>
-                    <th>Start</th>
-                    <th>End</th>
+                    <th>Time</th>
+                    <th></th>
                     <th>Duration</th>
                 </tr>
                 </thead>
@@ -95,9 +99,9 @@ const ProjectList = () => {
                         <td>{te.userId}</td>
                         <td>{te.taskId}</td>
                         <td>{te.projectId}</td>
-                        <td>{te.timeInterval.start}</td>
-                        <td>{te.timeInterval.end}</td>
-                        <td>{te.timeInterval.duration}</td>
+                        <td><DatePicker selected={new Date(te.timeInterval.start)} dateFormat="yyyy-MM-dd"/></td>
+                        <td>{formatTimeRange(te.timeInterval.start, te.timeInterval.end)}</td>
+                        <td>{formatDuration(te.timeInterval.duration)}</td>
                     </tr>
                 ))}
                 </tbody>
